@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+#wrap {width: 1200px; height: 1000px; margin: auto;}
+
+header {height: 100px;}
+header > .bar {height: 100px; background-color: rgb(237,237,237);}
+.calmstagram{font-size: 40px; color: dark}
+
+
+header .logo {width: 300px; height: 100px;}
+header .login-info{width: 900px; height: 100px;}
+
+
+.contents{height: 500px;}
+.login-box{width: 518px; height: 257px; border-radius: 2px; box-shadow: rgba(0,0,0,0.227451) 3px 3px 8px 0px; background-color: rgb(250, 250, 250);}
+.mark-id{width: 40px; height: 40px; background-color: rgb(237,237,237);}
+.mark-pw{width: 40px; height: 40px; background-color: rgb(237,237,237);}
+
+.sign-up-box{width: 518px; height: 481px; border-radius: 2px; box-shadow: rgba(0,0,0,0.227451) 3px 3px 8px 0px; background-color: rgb(250, 250, 250);}
+.sign-up-subject {margin:20px; font-weight:bold;}
+
+.post-box{width: 392px; height: 102px;}
+.text-white{font-size: 12px;}
+#uploadBtn{width: 60px; height: 40px;}
+
+footer{height: 100px;}
