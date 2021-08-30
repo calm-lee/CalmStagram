@@ -85,6 +85,7 @@ public class UserRestController {
 			session.setAttribute("userLoginId", user.getLoginId()); // 로그인한 id 가져오기
 			session.setAttribute("userId", user.getId()); // 로그인한 넘버 가져오기
 			session.setAttribute("userName", user.getName()); // 로그인한 이름 가져오기
+
 			result.put("result", "success");
 		} else {
 			result.put("result", "fail");

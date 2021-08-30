@@ -1,0 +1,103 @@
+<CalmStagram>
+
+1. user
+ 1) sign-in
+ 2) sign-up 
+
+2. post
+ 1) create (file, content)
+ 2) post 리스트 노출
+  1) Post Controller 아닌 timeLine Controller 
+   -    List<Post> 불러옴 -> model.addAttribute로 반복문용 postList 만듦
+  2) BO
+   - List<Post> 리턴
+  3) DAO
+   - List<Post> 리턴
+  4) Mapper
+   - select 문 limit 10개로.
+  5) JSP
+   - c:forEach 사용
+
+3. timeline
+ - Model: Content
+                -- post, List<Comment>, boolean filledLike, int likeCount
+  
+
+
+4. comment
+  1) create
+    a. RestController
+      - Map<String, Object> 반환 (RequestParam - postId, content)
+    b. BO
+     - int, addComment
+    c. DAO
+     - int, insertComment
+    d. Mapper
+     - insert
+    e. jsp
+     - AJAX 
+
+
+**이슈
+1) userId가 0임.
+2) 이미지 업로드 안됨.
+
+
+
+1) DB 연동
+타임라인의 카드 마다 댓글 영역에 DB에 저장된 실제 데이터들이 들어가도록
+BO, DAO, Mapper 등을 구현하세요.
+
+참고: 댓글은 게시글 마다 존재하므로, Post 객체 안에 들어가도록 설계한다.
+단, Post 객체는 DB의 엔티티 객체이므로 View에서 사용할 별도의 객체(Content)로 만들어 설계하고 교체한다.
+(Timeline 컨트롤러, timeline.jsp에도 수정 필요)
+
+댓글이 있는 경우에만 댓글 영역을 노출하세요.
+
+2) 마크업 된 화면에 실제 데이터 구성하기
+DB에서 가져온 데이터로 화면을 구성하세요.
+
+각 글에 대한 댓글들을 JSTL을 사용해서 반복문으로 구성하기 --> box내 <c:forEach>
+댓글쓴이가 로그인 된 사람과 일치하는 경우 x 아이콘 노출 --> <c:if>
+
+3. 자신의 댓글 삭제
+댓글을 삭제하는 API를 구현하세요. 
+- 어떤 댓글이 삭제되는 것인지 알아야 하므로 a 태그에 댓글의 id를 저장해 놓는다. 
+
+ (1) jsp
+   1) HTML
+   - a 태그에 data-comment-id 숨겨놓기 (jQuery용)
+   2) jQuery
+   -  commentId, commentContent 저장
+   - ajax로 삭제
+
+  (2) RestController
+    1) Map<String, Object>
+    2) result값 실행
+
+   (3) BO
+     1) int deleteByCommentId
+  
+   (4) DAO
+     1) int deleteByCommentsId
+
+   (5) Mapper
+     - delete문 (where id 조건)
+
+
+1. 좋아요 추가/해제 하기
+하트 버튼을 클릭하면 좋아요/해제가 되도록 구현하기(로그인 한 사람 기준)
+-> c:if문 & d-none
+    하트버튼.on.click - addClass, hasClass
+
+비로그인 상태에서 클릭하면 "로그인 후에 이용 가능합니다" 얼럿 문구 노출
+
+
+기능 추가 후 like 테이블 데이터로 잘 작동되는지 확인하세요.(추가/삭제)
+
+2. 타임라인을 구성하는 코드 중 Content 객체에 좋아요가 됐는지의 여부를 추가하여 내린다.
+좋아요 상태: 채워진 하트
+해제 상태: 비워진 하트
+
+좋아요 누름 -> like table에 userId, postId 추가 (insert)
+좋아요 취소 ->  like table에 userId, postId 삭제 (delete)

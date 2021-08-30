@@ -20,7 +20,7 @@
 			</div>
 			
 			<div class="d-flex justify-content-center">
-				<a href="/user/sign_up_view" class="btn btn-dark btn-block mt-3 mr-1 form-control" style="width: 100px; height: 40px;">회원가입</a>
+				<a href="/user/sign_up" class="btn btn-dark btn-block mt-3 mr-1 form-control" style="width: 100px; height: 40px;">회원가입</a>
 				<button type="submit" id="loginBtn" class="btn btn-primary btn-block mt-3 form-control" style="width: 100px; height: 40px;">로그인</button>		
 			</div>		
 				

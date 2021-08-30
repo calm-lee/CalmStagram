@@ -2,6 +2,9 @@
 
 #wrap {width: 1200px; height: 1000px; margin: auto;}
 
+a {text-decoration: none; color: #000;}
+a:hover {text-decoration: none; color:#000;}
+
 header {height: 100px;}
 header > .bar {height: 100px; background-color: rgb(237,237,237);}
 .calmstagram{font-size: 40px; color: dark}
@@ -23,4 +26,6 @@ header .login-info{width: 900px; height: 100px;}
 .text-white{font-size: 12px;}
 #uploadBtn{width: 60px; height: 40px;}
 
+
+.feed-box{width: 392px;}
 footer{height: 100px;}

@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+<!-- 글쓰기 영역 -->
 <c:if test="${not empty userId}">
 
 	<div class="d-flex justify-content-center mt-4">
@@ -31,15 +33,88 @@
 		</div>
 	</div>
 </c:if>
+
+<div style="width:350px; height:70px;">
+</div>
+
+<!-- 피드 -->
+
+<c:forEach var="content" items="${contentList}" varStatus="status"> <!-- postList 반복문으로 노출 -->
+<div class="d-flex justify-content-center mt-5">
+	<div class="feed-box form-control">
 	
+	<!-- 글쓴이 아이디, 삭제(...)버튼 -->
+		<div class="feed-header d-flex justify-content-between">
+			<span><b>${content.post.userName}</b></span>
+			<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="35">
+		</div>
+		
+	<!-- 피드 이미지 -->
+	<c:if test="${empty content.post.imgPath}">
+		<div class="image-feed d-none">
+			<a href="#" class="more-btn">
+			<img src="${content.post.imgPath}" width="350"></a>
+		</div>
+	</c:if>
+		  
+	<!-- 좋아요 영역 -->
+		<div class="like-feed d-flex mt-3 align-items-center">
+		
+			<a href="#" class="btn likeBtn" data-post-id="${content.post.id}"  data-user-id="${userId}"><img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="20" height="20"></a>
+			<a href="#" class="btn d-none canceledLikeBtn" data-post-id="${content.post.id}"  data-user-id="${userId}"><img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="20" height="20"></a>		
+		
+			<a href="#"><span class="ml-2">좋아요 00개</span></a>
+		</div>
+		
+	<!-- 글 영역 -->	
+		<div class="post-feed mt-2">
+			<span class="font-weight-bold">${content.post.userName}</span>
+			<span>
+				${content.post.content}
+			</span>
+		</div>
+		
+	<!-- 댓글 영역 -->			
+		<div class="comment-feed mt-3 border-bottom">
+			<div class="font-weight-bold">댓글</div>
+		</div>
+		
+		<!-- 댓글 목록 -->
+	<c:forEach var="comment" items="${content.commentList}">
+
+		<div class="comment-list mt-2 clearfix">
+			<div class="commentBlock">
+	            <span class="font-weight-bold">${comment.userName}</span>	
+				<span>${comment.content}</span>
+			
+			<!-- 댓글 삭제 버튼 -->
+				<a href="#" class="commentDelBtn float-right mr-3" data-comment-userName="${comment.userName}">
+				<img src="https://www.iconninja.com/files/603/22/506/x-icon.png" width="10px" height="10px">
+				</a>
+			</div>
+		</div>
+	</c:forEach>
+		
+	<!-- 댓글 쓰기 영역 -->	
+	<c:if test="${not empty content.post.userName}">
+		<div class="comment-create d-flex mt-2">
+			<input type="text" placeholder="댓글을 입력해주세요." id="commentTxt${content.post.id}" class="form-control">
+			<button type="button" class="btn btn-light commentBtn" data-post-id="${content.post.id}">게시</button>
+		</div>
+	</c:if>
+	</div>
+</div>
+</c:forEach>
 <script>
 	$(document).ready(function(){
 		
+		// 파일 업로드
 		$('#fileUploadBtn').on('click', function(e){
 			e.preventDefault();
 			$('#file').click();
 		});
 		
+		// 글 업로드 
 		$('#uploadBtn').on('click', function(e){
 			e.preventDefault();
 			
@@ -62,7 +137,7 @@
 					return;
 				} 
 			}
-			
+			 
 			// formData에 content, file 추가
 			let formData = new FormData();
 			formData.append("content", content);
@@ -93,6 +168,95 @@
 			
 		});
 		
-	});
+		// 코멘트 업로드
+		$('.commentBtn').on('click', function(e){
+			e.preventDefault();
+			
+			//postId 저장
+			let postId = $(this).data('post-id');
+			
+			//content 저장
+			let commentContent = $('#commentTxt' + postId).val();
+			
+			if(commentContent == ''){
+				return;
+			}
+			
+			$.ajax({
+				type:'POST',
+				url:'/comment/create_comment',
+				data: {"postId":postId, "content":commentContent},
+				success: function(data) {
+					if (data.result == 'success') {
+						location.reload(); // 새로고침
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
+			
+		});
+			
+		// 코멘트 삭제
+		$('.commentDelBtn').on('click', function(e){
+			e.preventDefault();
+			
+			//commentId 저장
+			let commentUserName = $(this).data('comment-userName');
+			
+			
+			$.ajax({
+				type:'POST',
+				url:'/comment/delete_comment',
+				data: {"id": commentUserName},
+				success: function(data) {
+					if (data.result == 'success') {
+						location.reload(); // 새로고침
+					} else {
+						alert("삭제 권한이 없습니다.");
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
+			
+		});		
+		
+		$('.likeBtn').on('click', function(e){
+			
+			e.preventDefault();
+			
+			let postId = $(this).data('post-id');
 
+			
+			$.ajax({
+				type:'POST',
+				url:'/timeline/add_like',
+				data: {"postId": postId},
+				success: function(data) {
+					if (data.result == 'success') {
+						location.reload(); // 새로고침
+					}
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
+
+		});
+		
+		$('.canceledLikeBtn').on('click', function(e){
+			e.preventDefault();
+			
+			$('.canceledLikeBtn').addClass('d-none');
+			$('.likeBtn').removeClass('d-none');
+
+		});
+	});
+		
 </script>
