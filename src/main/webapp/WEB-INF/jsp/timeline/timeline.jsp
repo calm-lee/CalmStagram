@@ -126,7 +126,6 @@
 			
 	
 			let imgPath = $('input[name=image]').val();
-			alert(imgPath);
 			
 			// 확장자 체크
 			if(imgPath != ''){ // file이 업로드되었다면
@@ -142,11 +141,10 @@
 			// formData에 content, file 추가
 			let formData = new FormData();
 			formData.append("content", content);
-			formData.append("imgPath", $('input[name=image]')[0].files[0]); 
+			formData.append("file", $('input[name=image]')[0].files[0]); 
 			// $('input[name=image]')[0] => 첫번째 input file 의미
 			// .files[0] => 업로드된 파일 중 첫번째 의미
 
-			
 			$.ajax({
 				url: "/post/post_create"
 				, method: 'POST'

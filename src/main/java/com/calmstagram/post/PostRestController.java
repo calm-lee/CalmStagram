@@ -25,7 +25,7 @@ public class PostRestController {
 	@RequestMapping("/post_create")
 	public Map<String, Object> createPost(
 		     @RequestParam("content") String content
-		    , @RequestParam(value="imgPath", required=false) MultipartFile imgPath
+		    , @RequestParam(value="file", required=false) MultipartFile file
 		    , HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
@@ -35,7 +35,7 @@ public class PostRestController {
 		
 		Map<String, Object> result = new HashMap<>();
 		
-		int row = postBO.addPost(userId, userName, content, imgPath);
+		int row = postBO.addPost(userId, userName, content, file);
 		
 		if(row > 0) {
 			result.put("result", "success");
