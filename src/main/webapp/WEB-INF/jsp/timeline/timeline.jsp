@@ -16,7 +16,7 @@
 				<!--  이미지 버튼 -->
 				<div>
 					<input type="file" name="image" id="file"
-						accept=".jpg, .jpeg, .png, .gif, .JPG,.JPEG, .PNG, .GIF" class="d-none"> <a
+						accept=".jpg, .jpeg, .png, .gif" class="d-none"> <a
 						href="#" id="fileUploadBtn"><img
 						src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
 						width="35"></a>
@@ -126,6 +126,7 @@
 			
 	
 			let imgPath = $('input[name=image]').val();
+			alert(imgPath);
 			
 			// 확장자 체크
 			if(imgPath != ''){ // file이 업로드되었다면
