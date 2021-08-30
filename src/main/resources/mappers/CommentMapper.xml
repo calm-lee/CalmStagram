@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.calmstagram.comment.DAO.CommentDAO">
+	
+	<select id="selectCommentList" resultType="com.calmstagram.comment.Model.Comment">
+	SELECT
+			id
+			, postId
+			, userId
+			, userName
+			, content
+			, createdAt
+			, updatedAt
+	from
+		`comment`
+	WHERE `postId` = #{postId};
+		
+	</select>
+	
+	<insert id="insertComment" parameterType="map">
+		INSERT INTO `comment`
+		(
+			postId
+			, userId
+			, userName
+			, content
+			, createdAt
+			, updatedAt
+		)
+		VALUES
+		(
+		#{postId}
+		, #{userId}
+		, #{userName}
+		, #{content}
+		, now()
+		, now()
+		);
+	
+	</insert>
+	
+	<delete id="deleteCommentById" >
+	
+		DELETE
+		FROM
+		`comment`
+		WHERE
+			`userName` = #{userName}
+		
+	</delete>
+
+</mapper>

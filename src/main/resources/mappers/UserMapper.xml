@@ -9,7 +9,8 @@
 	<select id="selectUserByIdAndPassword" parameterType="map" resultType="com.calmstagram.user.User.User">
 	
 		SELECT
-			`loginId`
+			id
+			,`loginId`
 			,`password`
 			,`name`
 			,`email`

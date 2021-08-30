@@ -24,22 +24,23 @@ public class CommentRestController {
 	@Autowired
 	private CommentBO commentBO;
 
-	@RequestMapping("/create")
+	
+	@RequestMapping("/create_comment")
 	public Map<String, Object> createComment(
 			@RequestParam("postId") int postId
 			, @RequestParam("content") String content
 			, HttpServletRequest request
 			){
-		
 		HttpSession session = request.getSession();
 		
 		int userId = (int) session.getAttribute("userId");
 		String userName = (String) session.getAttribute("userName");
 		
-		Map<String, Object> result = new HashMap<String, Object>();
-	
+		Map<String, Object> result = new HashMap<>();
+		
+		//DB에 코멘트 넣기
 		int row = commentBO.addComment(postId, userId, userName, content);
-	
+		
 		if(row > 0) {
 			result.put("result", "success");
 		} else {
@@ -48,4 +49,26 @@ public class CommentRestController {
 		
 		return result;
 	}
+	
+	@RequestMapping("/delete_comment")
+	public Map<String, Object> deleteComment(HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+		
+		int userId = (int) session.getAttribute("userId"); // 로그인한 사람이 지울 수 있도록
+		String userName = (String) session.getAttribute("userName");
+		
+		Map<String, Object> result = new HashMap<>();
+
+		int row = commentBO.deleteCommentById(userName);
+		
+		if(row > 0) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+	}
+	
 }
