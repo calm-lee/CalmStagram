@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.calmstagram.post.BO.PostBO;
 
@@ -24,7 +25,7 @@ public class PostRestController {
 	@RequestMapping("/post_create")
 	public Map<String, Object> createPost(
 		     @RequestParam("content") String content
-		    , @RequestParam(value="imgPath", required=false) String imgPath
+		    , @RequestParam(value="imgPath", required=false) MultipartFile imgPath
 		    , HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
