@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.calmstagram.post.Post.Post;
+import com.calmstagram.post.Model.Post;
 
 @Repository
 public interface PostDAO {
@@ -18,4 +18,6 @@ public interface PostDAO {
     , @Param("imgPath") String imgPath);
 	
 	public List<Post> selectPostList();
+	
+	public int deletePostByPostIdAndUserId(@Param("postId") int postId, @Param("userId") int userId);
 }

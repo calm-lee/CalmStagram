@@ -5,7 +5,7 @@
 <mapper namespace="com.calmstagram.post.DAO.PostDAO">
 
 
-	<select id="selectPostList" resultType="com.calmstagram.post.Post.Post">
+	<select id="selectPostList" resultType="com.calmstagram.post.Model.Post">
 		SELECT
 			id 
 			, userId
@@ -41,4 +41,12 @@
 		);
 
 	</insert>
+	
+	<delete id="deletePostByPostIdAndUserId" parameterType="map">
+		DELETE FROM `user`
+		WHERE
+			`postId` = #{postId}
+			AND `userId` = #{userId};
+	</delete>
+	
 </mapper>

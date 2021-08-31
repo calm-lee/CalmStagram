@@ -1,4 +1,4 @@
-package com.calmstagram.post.Post;
+package com.calmstagram.post.Model;
 
 import java.util.Date;
 

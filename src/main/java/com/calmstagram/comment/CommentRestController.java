@@ -60,7 +60,7 @@ public class CommentRestController {
 		
 		Map<String, Object> result = new HashMap<>();
 
-		int row = commentBO.deleteCommentById(userName);
+		int row = commentBO.deleteCommentByUserName(userName);
 		
 		if(row > 0) {
 			result.put("result", "success");

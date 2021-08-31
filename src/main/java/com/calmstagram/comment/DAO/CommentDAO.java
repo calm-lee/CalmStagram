@@ -18,6 +18,8 @@ public interface CommentDAO {
 			, @Param("userName") String userName
 			, @Param("content") String content);
 	
-	public int deleteCommentById(String userName);
+	public int deleteCommentByUserName(String userName);
+	
+	public void deleteCommentByPostId(int postId);
 	
 }

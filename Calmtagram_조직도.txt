@@ -99,5 +99,73 @@ DB에서 가져온 데이터로 화면을 구성하세요.
 좋아요 상태: 채워진 하트
 해제 상태: 비워진 하트
 
-좋아요 누름 -> like table에 userId, postId 추가 (insert)
+좋아요 누름 -> like table에 userId, postId 추가 (insert), 취소(delete), 반영(select)
+
+(1) Mapper
+ insert 
+ userId, postId
+ into `like`;
+
 좋아요 취소 ->  like table에 userId, postId 삭제 (delete)
+
+좋아요 반영 -> select문
+
+(2) DAO
+void로 
+1) insert : 좋아요 추가
+2) delete : 좋아요 삭제
+3) select : 좋아요 화면에 반영
+   : (postId or userId) <- 왜 or 쓰지???
+
+(3) BO
+ 1) existedLike (이미 좋아하는지 여부)
+ - Boolean
+ - void count = likeDAO에서 불러오기
+ - return값 삼항연산자 count > 0? true : false;
+ 
+ 2) addLike (좋아요 추가)
+   - existedLike (현재 좋아요 상태) 가져옴
+   - existedLike이 true면 좋아요 삭제 (이미 좋아요 했다는 것이므로)
+   - existedLike이 false면 좋아요 추가 (좋아요 안 했다는 것이므로)
+ 
+ 3) 좋아요 개수 
+    - LikeDAO의 int select 가져오기
+    - parameter값은 postId만. (포스트 당 개수이기 때문에 userId 정보는 필요 없으므로)
+
+ 4) filledLike
+
+(4) PostRestController 
+- BO 수행해서 like add or delete 실행
+
+(5) CotentBO
+ 1) 좋아요 상태 추가
+  - likeBO의 existedLike 이용
+   ex) content.setFilledLike(likeBO.existedLike(userId, post.getId()));
+ 2) 좋아요 개수 추가
+   - likeBO의 getLikeCountByPostId 이용
+   ex) content.setLikeCount(likeBO.getLikeCountByPostId(post.getId()));
+ 3) method에 parameter Integer userId 추가 - existedLike 때문
+
+(5) jsp
+ 1) 
+
+* 글 삭제
+로그인 된 사용자가 쓴 글인 경우에만 ...(More 버튼) 노출한다. 
+버튼을 클릭하면 삭제 모달창을 띄운다.
+글 삭제시 수행할 것
+post 제거
+이미지 파일 제거
+like 제거
+댓글들 제거
+
+1. PostRestController
+- Map<String, Object>
+- HttpSession 소환 (userId)
+
+2. BO
+- ContentBO에서 post, 좋아요, comment 같이 처리해서 select 했듯이
+- Delete도 마찬가지로 ContentBO에서 처리
+
+3. DAO
+
+4. Mapper

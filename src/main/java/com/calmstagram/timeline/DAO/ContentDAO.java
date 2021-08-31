@@ -5,7 +5,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Repository
 public interface ContentDAO {
-	
-	public int insertLike(@RequestParam("userId") int userId, @RequestParam("postId") int postId);
-	
+
 }

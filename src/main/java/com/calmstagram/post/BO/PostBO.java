@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.calmstagram.common.FileManagerService;
 import com.calmstagram.post.DAO.PostDAO;
-import com.calmstagram.post.Post.Post;
+import com.calmstagram.post.Model.Post;
 
 @Service
 public class PostBO {
@@ -20,6 +20,7 @@ public class PostBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 	
+	// 글 삽입하기
 	public int addPost(int userId, String userName, String content, MultipartFile file) {
 		
 		String imgPath = null;
@@ -36,8 +37,14 @@ public class PostBO {
 		return postDAO.insertPost(userId, userName, content, imgPath);
 	}
 	
+	// 글 가져오기
 	public List<Post> getPostList(){
 		return postDAO.selectPostList();
+	}
+	
+	// 글 삭제하기
+	public int deletePostByPostIdAndUserId(int postId, int userId) {
+		return postDAO.deletePostByPostIdAndUserId(postId, userId);
 	}
 	
 }

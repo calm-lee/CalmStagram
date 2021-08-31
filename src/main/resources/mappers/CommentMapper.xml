@@ -50,5 +50,23 @@
 			`userName` = #{userName}
 		
 	</delete>
-
+	
+	<delete id="deleteCommentByUerName" >
+	
+		DELETE
+		FROM
+		`comment`
+		WHERE
+			`userName` = #{userName}
+	</delete>
+	
+	<delete id="deleteCommentByPostId" >
+	
+		DELETE
+		FROM
+		`comment`
+		WHERE
+			`postId` = #{postId}
+		
+	</delete>
 </mapper>

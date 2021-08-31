@@ -25,10 +25,10 @@ public class timelineController {
 		
 		HttpSession session = request.getSession();
 		
-		int userId = (int) session.getAttribute("userId");
+		Integer userId = (Integer) session.getAttribute("userId");
 		String userName = (String) session.getAttribute("userName");
 		
-		List<Content> contentList = contentBO.getContentList();
+		List<Content> contentList = contentBO.getContentList(userId);
 		
 		model.addAttribute("contentList", contentList);
 		model.addAttribute("viewName", "timeline/timeline");

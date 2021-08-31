@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.calmstagram.comment.BO.CommentBO;
+import com.calmstagram.post.BO.LikeBO;
 import com.calmstagram.post.BO.PostBO;
-import com.calmstagram.post.Post.Post;
-import com.calmstagram.timeline.DAO.ContentDAO;
+import com.calmstagram.post.Model.Post;
 import com.calmstagram.timeline.Model.Content;
 
 @Service
@@ -22,10 +22,9 @@ public class ContentBO {
 	private CommentBO commentBO;
 	
 	@Autowired
-	private ContentDAO contentDAO;
-	
-	
-	public List<Content> getContentList(){
+	private LikeBO likeBO;
+
+	public List<Content> getContentList(Integer userId){ // filledLike을 위해 userId(Integer) 추가
 		
 		//1. contentList 만들기
 		List<Content> contentList = new ArrayList<>();
@@ -39,12 +38,19 @@ public class ContentBO {
 		for(Post post : postList) {
 			
 			Content content = new Content();
+			Content deleteContent = new Content();
 			
 			//setPost로 지금 post값 넣기
 			content.setPost(post);
 			
 			//setCommentList로 댓글 넣기
 			content.setCommentList(commentBO.getCommentList(post.getId()));
+			
+			// 좋아요 상태
+			content.setFilledLike(likeBO.existedLike(userId, post.getId()));
+			
+			// 좋아요 개수 넣기
+			content.setLikeCount(likeBO.getLikeCountByPostId(post.getId()));
 			
 			contentList.add(content);
 		}
@@ -53,8 +59,4 @@ public class ContentBO {
 		
 	}
 	
-	// 좋아요 추가
-	public int addLike(int userId, int postId) {
-		return contentDAO.insertLike(userId, postId);
-	}
 }

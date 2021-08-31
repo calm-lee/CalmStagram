@@ -44,9 +44,15 @@
 	<div class="feed-box form-control">
 	
 	<!-- 글쓴이 아이디, 삭제(...)버튼 -->
+		
 		<div class="feed-header d-flex justify-content-between">
 			<span><b>${content.post.userName}</b></span>
-			<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="35">
+			
+		<!-- userName이 post의 userName과 일치할 때만 노출 -->
+		<c:if test="${content.post.userName eq userName}">
+			<a href="#" class="btn moreBtn" data-toggle="modal" data-target="#moreModal" data-post-id="${content.post.id}">
+			<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="35"></a>
+		</c:if>
 		</div>
 		
 	<!-- 피드 이미지 -->
@@ -60,10 +66,18 @@
 	<!-- 좋아요 영역 -->
 		<div class="like-feed d-flex mt-3 align-items-center">
 		
-			<a href="#" class="btn likeBtn" data-post-id="${content.post.id}"  data-user-id="${userId}"><img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="20" height="20"></a>
-			<a href="#" class="btn d-none canceledLikeBtn" data-post-id="${content.post.id}"  data-user-id="${userId}"><img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="20" height="20"></a>		
+		<!-- filledLike이 false이면 빈하트가 보이게 -->
+		<c:if test="${content.filledLike eq false}">
+			<a href="#" class="btn likeBtn" data-post-id="${content.post.id}"  data-user-id="${userId}">
+			<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="20" height="20"></a>
+		</c:if>	
 		
-			<a href="#"><span class="ml-2">좋아요 00개</span></a>
+		<!-- filledLike이 true이면 채운하트가 보이게 -->
+		<c:if test="${content.filledLike eq true}">
+			<a href="#" class="btn likeBtn" data-post-id="${content.post.id}"  data-user-id="${userId}"><img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="20" height="20"></a>		
+		</c:if>
+		
+			<a href="#"><span class="ml-2">좋아요 ${content.likeCount}개</span></a>
 		</div>
 		
 	<!-- 글 영역 -->	
@@ -105,7 +119,28 @@
 	</div>
 </div>
 </c:forEach>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
+
+<!-- Modal layer -->
+<div class="modal fade bd-example-modal-sm" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="m-3 text-center">
+      	<a href="#" class="deletePost d-block"><b>삭제하기</b></a> <!-- d-block: 삭제할 수 있는 영역을 넓게 하기 위함  -->
+      </div>
+    </div>
+    <div class="modal-content">
+     <div class="m-3 text-center">
+      	<a href="#" class="cancel d-block" data-dismiss="modal">취소</a><!--  data-dismiss: 자동으로 modal창 닫음  -->
+      </div>
+    </div>
+  </div>
+</div>
+ 
 <script>
+
+
 	$(document).ready(function(){
 		
 		// 파일 업로드
@@ -223,22 +258,24 @@
 				}
 			});
 			
-		});		
+		});
 		
+		// 좋아요 추가/해제
 		$('.likeBtn').on('click', function(e){
 			
 			e.preventDefault();
 			
 			let postId = $(this).data('post-id');
-
-			
+			alert(postId);
 			$.ajax({
 				type:'POST',
-				url:'/timeline/add_like',
+				url:'/post/like_status',
 				data: {"postId": postId},
 				success: function(data) {
 					if (data.result == 'success') {
 						location.reload(); // 새로고침
+					} else {
+						alert("로그인해주세요.");
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
@@ -249,12 +286,34 @@
 
 		});
 		
-		$('.canceledLikeBtn').on('click', function(e){
+		// 글 삭제
+		
+		$('.moreBtn').on('click', function(e) {
+		 let postId = $(this).data('post-id');
+		 $('#moreModal').data('post-id', postId);
+		 alert(postId);
+		});
+		
+		// moreModal -> deletePost 버튼
+		$('#moreModal .deletePost').on('click', function(e){
 			e.preventDefault();
 			
-			$('.canceledLikeBtn').addClass('d-none');
-			$('.likeBtn').removeClass('d-none');
-
+			let postId = $(this).data('post-id');
+			
+			$.ajax({
+				type:'POST',
+				url:'/post/delete_post',
+				data: {"postId": postId},
+				success: function(data) {
+					if (data.result == 'success') {
+						alert("삭제가 완료되었습니다.");
+						location.reload(); // 새로고침
+					}
+				error: function(jqXHR, textStatus, errorThrown) {
+					var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus);
+				}
+			});
 		});
 	});
 		
