@@ -51,7 +51,7 @@
 		
 	</delete>
 	
-	<delete id="deleteCommentByUerName" >
+	<delete id="deleteCommentByUserName" >
 	
 		DELETE
 		FROM

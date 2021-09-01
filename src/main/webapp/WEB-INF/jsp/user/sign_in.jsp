@@ -55,7 +55,7 @@ $(document).ready(function(){
 		
 		$.post(url,data).done(function(data){
 			if(data.result == "success"){
-				alert("로그인에 성공했습니다.");
+				alert("환영합니다.");
 				location.href="/timeline/timeline_view";
 			} else {
 				alert("아이디와 비밀번호를 확인해주세요.");

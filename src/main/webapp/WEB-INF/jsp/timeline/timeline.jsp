@@ -261,7 +261,7 @@
 			e.preventDefault();
 			
 			let postId = $(this).data('post-id');
-			alert(postId);
+			
 			$.ajax({
 				type:'POST',
 				url:'/post/like_status',
@@ -293,7 +293,6 @@
 			e.preventDefault();
 			
 			let postId = $('#moreModal').data('post-id');
-			alert(postId);
 			
 			$.ajax({
 				type:'POST',

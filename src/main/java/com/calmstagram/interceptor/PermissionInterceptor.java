@@ -7,9 +7,11 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+@Component
 public class PermissionInterceptor  implements HandlerInterceptor {
 
 	//private Logger logger = LoggerFactory.getLogger(PermissionInterceptor.class);
