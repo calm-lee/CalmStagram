@@ -20,6 +20,7 @@ public interface CommentDAO {
 	
 	public int deleteCommentByUserName(String userName);
 	
+	// 글 작성자가 content를 모두 삭제할 때 용도(userId 본인일 필요 없음)
 	public void deleteCommentByPostId(int postId);
 	
 }

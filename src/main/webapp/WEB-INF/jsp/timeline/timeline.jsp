@@ -56,13 +56,10 @@
 		</div>
 		
 	<!-- 피드 이미지 -->
-	<c:if test="${empty content.post.imgPath}">
-		<div class="image-feed d-none">
-			<a href="#" class="more-btn">
-			<img src="${content.post.imgPath}" width="350"></a>
-		</div>
-	</c:if>
-		  
+		<c:if test="${not empty content.post.imgPath}">
+			<img src="${content.post.imgPath}" width="350">
+		</c:if>
+		 
 	<!-- 좋아요 영역 -->
 		<div class="like-feed d-flex mt-3 align-items-center">
 		
@@ -119,8 +116,6 @@
 	</div>
 </div>
 </c:forEach>
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
 
 <!-- Modal layer -->
 <div class="modal fade bd-example-modal-sm" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -291,14 +286,14 @@
 		$('.moreBtn').on('click', function(e) {
 		 let postId = $(this).data('post-id');
 		 $('#moreModal').data('post-id', postId);
-		 alert(postId);
 		});
 		
 		// moreModal -> deletePost 버튼
 		$('#moreModal .deletePost').on('click', function(e){
 			e.preventDefault();
 			
-			let postId = $(this).data('post-id');
+			let postId = $('#moreModal').data('post-id');
+			alert(postId);
 			
 			$.ajax({
 				type:'POST',
@@ -309,6 +304,7 @@
 						alert("삭제가 완료되었습니다.");
 						location.reload(); // 새로고침
 					}
+				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					var errorMsg = jqXHR.responseJSON.status;
 					alert(errorMsg + ":" + textStatus);
@@ -316,5 +312,5 @@
 			});
 		});
 	});
-		
+	
 </script>

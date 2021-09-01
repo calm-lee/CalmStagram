@@ -165,6 +165,8 @@ like 제거
 2. BO
 - ContentBO에서 post, 좋아요, comment 같이 처리해서 select 했듯이
 - Delete도 마찬가지로 ContentBO에서 처리
+<-- no.. 각각임.. (post, comment, like)
+어떻게, 어디서 삭제기능을 취합하지?
 
 3. DAO
 

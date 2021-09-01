@@ -43,9 +43,9 @@
 	</insert>
 	
 	<delete id="deletePostByPostIdAndUserId" parameterType="map">
-		DELETE FROM `user`
+		DELETE FROM `post`
 		WHERE
-			`postId` = #{postId}
+			`id` = #{postId}
 			AND `userId` = #{userId};
 	</delete>
 	

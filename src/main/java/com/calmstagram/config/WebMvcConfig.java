@@ -23,7 +23,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) { //내 서버에 있는 이미지파일을 가져와서 mapping을 할 수 있도록 해줌
 		registry.addResourceHandler("/images/**")
-		        .addResourceLocations("D:\\Spring Project\\SNS_Project\\Calmstagram\\images/"); // 실제 파일 저장 위치
+		        .addResourceLocations("file://D:\\Spring Project\\SNS_Project\\Calmstagram\\src\\main\\resources\\static\\images/"); // 실제 파일 저장 위치
 	
 	}	
 }

@@ -42,10 +42,9 @@ public class LikeBO {
 		return likeDAO.selectLikeByUserIdOrPostId(postId, null);
 	}
 	
-	// 좋아요 삭제 (postId)
-	/*
-	 * public void deleteLikeByPostId(int postId) {
-	 * likeDAO.deleteLikeByPostId(postId); }
-	 */
+	// 글 작성자가 content를 모두 삭제할 때 용도(userId 본인일 필요 없음, postId만 필요)
+
+	  public void deleteLikeByPostId(int postId) {
+	  likeDAO.deleteLikeByPostId(postId); }
 	
 }

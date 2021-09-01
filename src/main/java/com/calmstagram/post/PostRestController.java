@@ -87,7 +87,7 @@ public class PostRestController {
 			
 			int userId = (int) session.getAttribute("userId");
 			
-			int row = postBO.deletePostByPostIdAndUserId(postId, userId);
+			int row = postBO.deletePostByPostIdAndUserId(postId, userId); // 본인이 해당 포스트를 삭제해야 하므로 userId, postId 모두 필요
 			
 			if(row > 0) {
 				result.put("result", "success");
