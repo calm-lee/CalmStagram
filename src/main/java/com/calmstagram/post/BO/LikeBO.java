@@ -17,7 +17,7 @@ public class LikeBO {
 		boolean existedLike = existedLike(userId, postId);
 		
 		if(existedLike == true) { // 이미 내가 좋아요 누른 상태이면
-			likeDAO.deleteLikeByPostIdUserId(userId, postId); // 좋아요 취소
+			likeDAO.deleteLikeByPostIdOrUserId(userId, postId); // 좋아요 취소
 		} else { // 좋아요 누르지 않은 상태이면
 			likeDAO.insertLike(userId, postId); // 좋아요 추가
 		}

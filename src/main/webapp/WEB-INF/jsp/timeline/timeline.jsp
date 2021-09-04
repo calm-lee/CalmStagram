@@ -9,12 +9,12 @@
 	<div class="d-flex justify-content-center mt-4">
 
 		<div class="post-box">
-			<textarea class="form-control" name="content" cols="10" rows="5"
+			<textarea name="content" cols="20" rows="5"
 				placeholder="내용을 입력해주세요."></textarea>
 
-			<div class="d-flex justify-content-between mt-2">
+			<div class="d-flex justify-content-between mt-4">
 				<!--  이미지 버튼 -->
-				<div>
+				<div class="ml-2">
 					<input type="file" name="image" id="file"
 						accept=".jpg, .jpeg, .png, .gif" class="d-none"> <a
 						href="#" id="fileUploadBtn"><img
@@ -23,10 +23,10 @@
 				</div>
 
 				<!-- 업로드 버튼 -->
-				<div>
+				<div class="mr-2">
 					<button type="button" id="uploadBtn"
-						class="btn form-control bg-info">
-						<span class="text-white">업로드</span>
+						class="btn form-control bg-info" style="color:white; font-size:12px">
+						업로드
 					</button>
 				</div>
 			</div>
@@ -45,23 +45,25 @@
 	
 	<!-- 글쓴이 아이디, 삭제(...)버튼 -->
 		
-		<div class="feed-header d-flex justify-content-between">
-			<span><b>${content.post.userName}</b></span>
+		<div class="feed-header d-flex justify-content-between mt-2">
+			<b>${content.post.userName}</b></span>
 			
 		<!-- userName이 post의 userName과 일치할 때만 노출 -->
-		<c:if test="${content.post.userName eq userName}">
-			<a href="#" class="btn moreBtn" data-toggle="modal" data-target="#moreModal" data-post-id="${content.post.id}">
-			<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="35"></a>
-		</c:if>
+			<c:if test="${content.post.userName eq userName}">
+				<a href="#" class="btn moreBtn" data-toggle="modal" data-target="#moreModal" data-post-id="${content.post.id}">
+				<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="35"></a>
+			</c:if>
 		</div>
 		
 	<!-- 피드 이미지 -->
 		<c:if test="${not empty content.post.imgPath}">
+		<div class="mt-3">
 			<img src="${content.post.imgPath}" width="350">
+		</div>
 		</c:if>
 		 
 	<!-- 좋아요 영역 -->
-		<div class="like-feed d-flex mt-3 align-items-center">
+		<div class="like-feed d-flex mt-1 align-items-center">
 		
 		<!-- filledLike이 false이면 빈하트가 보이게 -->
 		<c:if test="${content.filledLike eq false}">
@@ -73,8 +75,7 @@
 		<c:if test="${content.filledLike eq true}">
 			<a href="#" class="btn likeBtn" data-post-id="${content.post.id}"  data-user-id="${userId}"><img src="https://www.iconninja.com/files/527/809/128/heart-icon.png" width="20" height="20"></a>		
 		</c:if>
-		
-			<a href="#"><span class="ml-2">좋아요 ${content.likeCount}개</span></a>
+		좋아요 ${content.likeCount}개
 		</div>
 		
 	<!-- 글 영역 -->	
@@ -86,8 +87,9 @@
 		</div>
 		
 	<!-- 댓글 영역 -->			
-		<div class="comment-feed mt-3 border-bottom">
-			<div class="font-weight-bold">댓글</div>
+		<div class="comment-feed mt-4 border-bottom">
+			<div style="font-size:16px; color: #808080">댓글</div>
+			
 		</div>
 		
 		<!-- 댓글 목록 -->

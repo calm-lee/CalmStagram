@@ -3,49 +3,50 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="wrap d-flex justify-content-center">
 	<div>
-	<h2><b>회원가입</b></h2>
+	<div style="height: 40px;"></div>
 	<form id="signUpForm" method="post" action="/user/sign_up_for_submit">
 		<div class="sign-up-box">
-		
-			<div class="m-3">
-			<span class="sign-up-subject">ID</span>
+		<div class="d-flex justify-content-center">
+			<h3 class="logo_bk mt-3">Calmstagram</h3>
+		</div>
+			<div style="font-size:14px;" class="text-center" style="color:#3f3f40">소중한 순간을 공유해보세요.</div>	
 			<div class="d-flex">
-				<input type="text" id="loginId" name="loginId" class="form-control col-8" placeholder="아이디를 입력해주세요.">
-				<button type="button" id="checkBtn" class="form-control btn-info col-2 ml-2" style="font-size: 12px;">중복확인</button>
-			</div>
+				<input type="text" id="loginId" name="loginId" class="form-control col-9 mt-4 ml-3" placeholder="아이디를 입력해주세요.">
+				<button type="button" id="checkBtn" class="form-control btn-info col-2 mt-4 ml-2" style="font-size: 12px;">중복확인</button>
 			</div>
 			
-			<div id="statusArea">
+			<div id="statusArea" class="d-flex ml-4">
 				<div id="idCheckLength" class="small text-danger d-none">ID를 4자 이상 입력해주세요.</div>
 				<div id="idCheckDuplicated" class="small text-danger d-none">이미 사용 중인 아이디입니다.</div>
 				<div id="idCheckOk" class="small text-success d-none">사용 가능한 아이디입니다.</div>
 			</div>
-
+			
 			<div class="m-3">
-			<span class="sign-up-subject">password</span>
-			<input type="password" id="password" name="password" class="form-control col-6" placeholder="비밀번호를 입력해주세요.">
+			<input type="password" id="password" name="password" class="form-control col-12" placeholder="비밀번호를 입력해주세요.">
 			</div>
 						
 			<div class="m-3">
-			<span class="sign-up-subject">confirm password</span>
-			<input type="password" id="confirmPassword" name="confirmPassword" class="form-control col-6" placeholder="비밀번호를 입력해주세요.">
+			<input type="password" id="confirmPassword" name="confirmPassword" class="form-control col-12" placeholder="비밀번호를 다시 한번 입력해주세요.">
 			</div>
 			
 			<div class="m-3">
-			<span class="sign-up-subject">이름</span>
-			<input type="text" id="name" name="name" class="form-control col-8" placeholder="이름을 입력해주세요.">
+			<input type="text" id="name" name="name" class="form-control col-12" placeholder="이름을 입력해주세요.">
 			</div>
 			
 			<div class="m-3">
-			<span class="sign-up-subject">이메일</span>
-			<input type="text" id="email" name="email" class="form-control col-8" placeholder="이메일을 입력해주세요."> 
+			<input type="text" id="email" name="email" class="form-control col-12" placeholder="이메일을 입력해주세요."> 
 			</div>
-			
-			
-			<div class="d-flex justify-content-center m-3">
-				<button type="button" id="signUpBtn" class="btn btn-info">회원가입</button>		
-			</div>
+		
 		</div>
+		
+			<div class="d-flex justify-content-center">
+				<button type="button" id="signUpBtn" class="btn btn-info mt-3" style="width: 450px">회원가입</button>		
+			</div>
+			
+			<div class="d-flex justify-content-center mt-2">
+				<span style="color:#3f3f40">계정이 있으신가요?</span>
+				<a href="/user/sign_in" class="ml-2" style="color:#3f3f40"><b>로그인하기</b></a>	
+			</div>		
 	</form>
 	</div>
 </div>

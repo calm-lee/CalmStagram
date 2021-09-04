@@ -24,7 +24,7 @@ public class UserRestController {
 
 	// 아이디 중복 찾기
 	@RequestMapping("/is_duplicated")
-	public Map<String, Object> isDuplicated(@RequestParam(value="loginId", required=false) String loginId){
+	public Map<String, Object> isDuplicated(@RequestParam("loginId") String loginId){
 		
 		Map<String, Object> result = new HashMap<>();
 		int user = userBO.getExsistedUser(loginId);

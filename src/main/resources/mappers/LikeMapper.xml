@@ -29,7 +29,7 @@
 	    );
 	</insert>
 
-	<delete id="deleteLike" parameterType="map">
+	<delete id="deleteLikeByPostIdOrUserId" parameterType="map">
 	DELETE FROM `like`
 	WHERE
 		userId = #{userId}
