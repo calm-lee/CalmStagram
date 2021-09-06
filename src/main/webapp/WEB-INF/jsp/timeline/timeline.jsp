@@ -9,7 +9,7 @@
 	<div class="d-flex justify-content-center mt-4">
 
 		<div class="post-box">
-			<textarea name="content" cols="20" rows="5"
+			<textarea name="content" cols="50" rows="4"
 				placeholder="내용을 입력해주세요."></textarea>
 
 			<div class="d-flex justify-content-between mt-4">
@@ -34,8 +34,6 @@
 	</div>
 </c:if>
 
-<div style="width:350px; height:70px;">
-</div>
 
 <!-- 피드 -->
 
