@@ -2,17 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<div class="timeline" style="background-color:#f5f5f5">
 
 <!-- 글쓰기 영역 -->
 <c:if test="${not empty userId}">
 
-	<div class="d-flex justify-content-center mt-4">
+	<div class="d-flex justify-content-center">
 
-		<div class="post-box">
+		<div class="post-box form-control  mt-4">
 			<textarea name="content" cols="50" rows="4"
 				placeholder="내용을 입력해주세요."></textarea>
 
-			<div class="d-flex justify-content-between mt-4">
+			<div class="d-flex justify-content-between mt-3">
 				<!--  이미지 버튼 -->
 				<div class="ml-2">
 					<input type="file" name="image" id="file"
@@ -116,6 +117,7 @@
 	</div>
 </div>
 </c:forEach>
+</div>
 
 <!-- Modal layer -->
 <div class="modal fade bd-example-modal-sm" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -132,7 +134,6 @@
     </div>
   </div>
 </div>
- 
 <script>
 
 

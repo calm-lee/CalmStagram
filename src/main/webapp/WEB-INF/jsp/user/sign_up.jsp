@@ -9,7 +9,7 @@
 		<div class="d-flex justify-content-center">
 			<h3 class="logo_bk mt-3">Calmstagram</h3>
 		</div>
-			<div style="font-size:14px;" class="text-center" style="color:#3f3f40">소중한 순간을 공유해보세요.</div>	
+			<div style="font-size:14px; color:#3f3f40" class="text-center">소중한 순간을 공유해보세요.</div>	
 			<div class="d-flex">
 				<input type="text" id="loginId" name="loginId" class="form-control col-9 mt-4 ml-3" placeholder="아이디를 입력해주세요.">
 				<button type="button" id="checkBtn" class="form-control btn-info col-2 mt-4 ml-2" style="font-size: 12px;">중복확인</button>

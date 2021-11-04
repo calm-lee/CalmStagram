@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Calmstagram</title>
+<title>Outstagram</title>
 
   <!-- bootstrap CDN link -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -20,9 +20,16 @@
 </head>
 <body>
 	<div id="wrap">
+	<c:if test="${not empty userName}">
+		<header>
+			<jsp:include page="../include/header.jsp" />
+		</header>
+	</c:if>
+		<c:if test="${empty userName}">
 		<header>
 			<jsp:include page="../include/gnb.jsp" />
 		</header>
+	</c:if>
 		<section>
 			<jsp:include page="../#{viewName}.jsp" />
 		</section>

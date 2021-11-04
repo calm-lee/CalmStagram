@@ -4,7 +4,7 @@
 <header>
 	<div class="bar d-flex justify-content-between">
 		<div class="mt-3 ml-5">
-			<a href="/timeline/timeline_view"><span class="logo">Calmstargram</span></a>
+			<a href="/timeline/timeline_view"><span class="logo">Outstargram</span></a>
 		</div>
 		<div class="justify-content-end mt-5 mr-5">
 			

@@ -13,7 +13,7 @@
 	<div class="login-box form-control">
 		
 		<div>	
-		<h3 class="text-center logo_bk mt-3">Calmstagram</h3>
+		<h3 class="text-center logo_bk mt-3">Outstagram</h3>
 		<div style="font-size:14px;" class="text-center" style="color:3f3f40">어떤 일이 벌어지고 있을까요?</div>
 		</div>		
 			<div class="d-flex justify-content-center align-items-center mt-4">
